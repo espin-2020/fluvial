@@ -1,7 +1,17 @@
 # fluvial
 A coupled sediment transport and flooding landlab experiment
 
-*Authors of this Notebook: Shelby Ahrendt, Josie Arcuri, Eric Barefoot, Rachel Bosch, François Clapuyt, Hima Hassenruck-Gudapati, Vini Perin, Edwin Saavedra, Mohit Tunwal*
+|Contributors|At| |
+|:--|:--|--:|
+|Shelby Ahrendt| | |
+|Josie Arcuri| | |
+|Eric Barefoot| | |
+|Rachel Bosch| | |
+|François Clapuyt| | |
+|Hima Hassenruck-Gudapati| | |
+|Vini Perin| | |
+|Edwin Saavedra C.| University | [![Github or somethin](https://img.shields.io/badge/LINK-Somewhere-4F2582.svg)](https:///)|
+|Mohit Tunwal|
 
 (19 August 2020)
 
