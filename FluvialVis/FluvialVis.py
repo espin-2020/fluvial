@@ -112,7 +112,7 @@ def plot_overland_flow(rmg,outlet_nearest_raster_cell,elapsed_time,filepath = ""
     imshow_grid(rmg,'topographic__elevation',colorbar_label='Elevation (m)')
     imshow_grid(rmg,'surface_water__depth',limits=(0,2),cmap=mycmap,colorbar_label='Water depth (m)')
     plt.title(f'Time = {round(elapsed_time,1)} s')
-    #plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
+    plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
     if len(filepath) > 0:
         fig.savefig(filepath + "flow/" + str(elapsed_time).zfill(5) + ".png", dpi=150)
         plt.close(fig)
@@ -172,12 +172,13 @@ def plot_parcels(new_grid, parcels, elapsed_time, outlet_nearest_raster_cell, fi
         plt.show()
 def save_animations(source):
     
-    source_list=np.asarray(["./output/flow/*", "*/output/sed/*", "*/output/floodplain/*"])
+    source_list=np.asarray(["./output/flow/*", "./output/sed/*", "./output/floodplain/*"])
     animation_list = np.asarray(['./output/animationupland.gif', './output/animationsed.gif', './output/animationlowland.gif'])
     for i in range(0,3):
         images = []
         original_files=list(glob.glob(source_list[i]))
         original_files.sort(reverse=False)
+        print(source_list[i])
         for file_ in original_files:
             images.append(imageio.imread(file_))
         imageio.mimsave(animation_list[i], images, duration=1/5, subrectangles=True)
