@@ -43,9 +43,9 @@ def plot_outlet_conditions(hydrograph_time, discharge, height_at_outlet, parcels
     fig2 = plot_depth(hydrograph_time, height_at_outlet)
     fig3 = plot_sed_volume(parcels)
     if len(filepath) > 0:
-        fig1.savefig(filepath+"runoff_discharge.jpeg")
-        fig2.savefig(filepath+"runoff_height.jpeg")
-        fig3.savefig(filepath+"sediment_volume.jpeg")
+        fig1.savefig(filepath+"runoff_discharge.jpeg", dpi = 1000)
+        fig2.savefig(filepath+"runoff_height.jpeg", dpi = 1000)
+        fig3.savefig(filepath+"sediment_volume.jpeg", dpi = 1000)
         print("outlet figures saved")
     else: 
         plt.show()
@@ -114,7 +114,7 @@ def plot_overland_flow(rmg,outlet_nearest_raster_cell,elapsed_time,filepath = ""
     plt.title(f'Time = {round(elapsed_time,1)} s')
     plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
     if len(filepath) > 0:
-        fig.savefig(filepath + "flow/" + str(elapsed_time).zfill(5) + ".png", dpi=150)
+        fig.savefig(filepath + "flow/" + str(int(elapsed_time)).zfill(5) + ".png", dpi=150)
         plt.close(fig)
     else: 
         plt.show()
@@ -128,7 +128,7 @@ def plot_floodplain(grid, zFP, nX, nY, elapsed_time, filepath = ""):
           cmap = mycmap,
           plot_name="Time = %i" %elapsed_time)
     if len(filepath) > 0:
-        fig.savefig(filepath + "floodplain/" + str(elapsed_time).zfill(5) + ".png", dpi = 150)
+        fig.savefig(filepath + "floodplain/" + str(int(elapsed_time)).zfill(5) + ".png", dpi = 150)
         plt.close(fig)
     else: 
         plt.show()
@@ -166,7 +166,7 @@ def plot_parcels(new_grid, parcels, elapsed_time, outlet_nearest_raster_cell, fi
     plt.grid(True)
     plt.show()
     if len(filepath) > 0:
-        fig.savefig(filepath + "sed/" +str(elapsed_time).zfill(5) + ".png", dpi = 150)
+        fig.savefig(filepath + "sed/" +str(int(elapsed_time)).zfill(5) + ".png", dpi = 150)
         plt.close(fig)
     else: 
         plt.show()
