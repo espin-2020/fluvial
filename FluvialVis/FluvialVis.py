@@ -91,21 +91,25 @@ def plot_storm(rmg,h):
                 color_for_closed=None,\
                 cmap = mycmap,\
                 colorbar_label="Initial rain $h$ [m]",\
-                output=None,shrink=0.5)
+                output=None,shrink=0.5, vmin = 0, vmax = .5)
     plt.show()
-def plot_initial_floodplain(zFP, nX, nY, grid):
+def plot_initial_floodplain(zFP, nX, nY, grid, filepath = ""):
     # Plot 2D domain topography
     
     fig = plt.figure(figsize=(14,8))
     plt.subplot(1,2,1)
     ls = LightSource(azdeg=315, altdeg=45)
-    plt.imshow(ls.hillshade(np.reshape(zFP,[nX,nY]), vert_exag=10), cmap='gray')
+    plt.imshow(ls.hillshade(np.reshape(zFP,[nX,nY]), vert_exag=10), cmap='gist_earth')
     plt.title('initial floodplain topography')
 
     #Plot 2D domain hydraulic cond.
     plt.subplot(1,2,2)
     imshow_grid(grid,'hydraulic_conductivity', plot_name="Hydraulic Conductivity", cmap="winter")
-    fig.show()
+    if len(filepath) > 0:
+        fig.savefig(filepath + "initialfloodplain.png", dpi=200)
+        plt.close(fig)
+    else: 
+        plt.show()
 def plot_overland_flow(rmg,outlet_nearest_raster_cell,elapsed_time,filepath = ""):  
     #Plot overland flow 
     fig=plt.figure()
