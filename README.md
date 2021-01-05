@@ -3,15 +3,15 @@ A coupled sediment transport and flooding landlab experiment.  Still under const
 
 |Contributors|At| |
 |:--|:--|--:|
-|Shelby Ahrendt|University of Washington| |
-|Josie Arcuri|Indiana University| |
-|Eric Barefoot|Rice University| |
-|Rachel Bosch|University of Cincinnati| |
-|François Clapuyt|Université Catholique de Louvain| |
-|Hima Hassenruck-Gudapati| University of Texas at Austin| |
-|Vinicius Perin|North Carolina State University| |
-|Edwin Saavedra C.| Northwestern University | [![Github or somethin](https://img.shields.io/badge/LINK-Somewhere-4F2582.svg)](https:///)|
-|Mohit Tunwal|Penn State University| |
+|Shelby Ahrendt|University of Washington| 
+|Josie Arcuri|Indiana University| 
+|Eric Barefoot|Rice University| 
+|Rachel Bosch|University of Cincinnati| 
+|François Clapuyt|Université Catholique de Louvain| 
+|Hima Hassenruck-Gudapati| University of Texas at Austin| 
+|Vinicius Perin|North Carolina State University| 
+|Edwin Saavedra C.| Northwestern University | 
+|Mohit Tunwal|Penn State University|
 
 Learning Objectives:
 
