@@ -1,5 +1,5 @@
 # Coupling grids with different geometries and scales: an example from fluvial geomorphology
-A landlab experimemnt linking upland precipitation runoff and sediment tranport to lowland overbank flooding and infiltration. We provide an educational notebook, `'CoupledGridsEKT.ipynb'` addressing the fluvial geomorhpology and software engineering learning objectives - the main result from the fluvial group in ESPIn 2020.
+A landlab experiment linking upland precipitation runoff and sediment tranport to lowland overbank flooding and infiltration. We provide an educational notebook, `'CoupledGridsEKT.ipynb'` addressing the fluvial geomorhpology and software engineering learning objectives - the main result from the fluvial group in ESPIn 2020.
 
 |Contributors|At|
 |:--|:--|
