@@ -1,8 +1,8 @@
 # Coupling grids with different geometries and scales: an example from fluvial geomorphology
 A coupled sediment transport and flooding landlab experiment.  Still under construction, but working notebook is named fluvial_group_clean.ipynb - look in there for latest, working advances!
 
-|Contributors|At| |
-|:--|:--|--:|
+|Contributors|At|
+|:--|:--|
 |Shelby Ahrendt|University of Washington| 
 |Josie Arcuri|Indiana University| 
 |Eric Barefoot|Rice University| 
