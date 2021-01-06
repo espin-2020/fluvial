@@ -114,9 +114,9 @@ def plot_overland_flow(rmg,outlet_nearest_raster_cell,elapsed_time,filepath = ""
     #Plot overland flow 
     fig=plt.figure()
     imshow_grid(rmg,'topographic__elevation',colorbar_label='Elevation (m)')
-    imshow_grid(rmg,'surface_water__depth',limits=(0,2),cmap=mycmap,colorbar_label='Water depth (m)')
+    imshow_grid(rmg,'surface_water__depth',limits=(0,1),cmap=mycmap,colorbar_label='Water depth (m)')
     plt.title(f'Time = {round(elapsed_time,1)} s')
-    plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
+    #plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
     if len(filepath) > 0:
         fig.savefig(filepath + "flow/" + str(int(elapsed_time)).zfill(5) + ".png", dpi=150)
         plt.close(fig)
@@ -127,7 +127,7 @@ def plot_floodplain(grid, zFP, nX, nY, elapsed_time, filepath = ""):
     ls = LightSource(azdeg=315, altdeg=45)
     plt.imshow(ls.hillshade(np.reshape(zFP,[nX,nY]), vert_exag=10), cmap='gist_earth',origin="lower")
     imshow_grid(grid,'surface_water__depth',
-          limits=(0,1),                    
+          limits=(0,.5),                    
           colorbar_label="Water depth (m)", 
           cmap = mycmap,
           plot_name="Time = %i" %elapsed_time)
