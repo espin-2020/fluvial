@@ -41,4 +41,4 @@ Given a structured Jupyter notebook with parameters that can vary, students will
 <img src="https://i.imgur.com/ty6NZyi.jpg" alt="conceptual framework" width="500"/>
 
 ## **Floodplain + Infiltration**
-![gifThing](sample_output/floodplainanimation.gif?raw=true)
+![gifThing](sample_output/animationlowland.gif?raw=true)

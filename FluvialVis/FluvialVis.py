@@ -127,7 +127,7 @@ def plot_floodplain(grid, zFP, nX, nY, elapsed_time, filepath = ""):
     ls = LightSource(azdeg=315, altdeg=45)
     plt.imshow(ls.hillshade(np.reshape(zFP,[nX,nY]), vert_exag=10), cmap='gist_earth',origin="lower")
     imshow_grid(grid,'surface_water__depth',
-          limits=(0,.5),                    
+          limits=(0,1),                    
           colorbar_label="Water depth (m)", 
           cmap = mycmap,
           plot_name="Time = %i" %elapsed_time)
