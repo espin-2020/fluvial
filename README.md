@@ -35,7 +35,7 @@ Given a structured Jupyter notebook with parameters that can vary, students will
 
 
 ## **Conceptual model**
-<img src="https://i.imgur.com/jS8EqiI.jpg" alt="conceptual framework" width="500"/> 
+<img src="https://i.imgur.com/TsYaQqu.png" alt="conceptual framework" width="500"/> 
 
 ## **Coupling stuff**
 <img src="https://i.imgur.com/ty6NZyi.jpg" alt="conceptual framework" width="500"/>
