@@ -25,27 +25,40 @@ def plot_depth(hydrograph_time, height_at_outlet):
     plt.legend(loc="upper right")
     return fig
 
-def plot_sed_volume(parcels):
+def plot_sed_volume(parcels, sed_start):
     parcel_vol_on_grid = parcels.dataset["volume"].values
     #if s
+    fig=plt.figure(4)
     parcel_vol_on_grid[parcels.dataset["element_id"].values==-2]=0
     sum_parcel_vol_on_grid = np.sum(parcel_vol_on_grid, axis=0)
-    fig=plt.figure(4)
-    plt.plot(np.asarray(parcels.time_coordinates), 
+
+    plt.plot(np.asarray(parcels.time_coordinates)+sed_start, 
              sum_parcel_vol_on_grid[0]-sum_parcel_vol_on_grid,'b-'
             )
     plt.ylabel('Total volume of parcels that left catchment $[m^3]$')
+    plt.xlim(0, np.max(parcels.time_coordinates)+sed_start)
     plt.xlabel('Time (seconds)')
     return fig
 
-def plot_outlet_conditions(hydrograph_time, discharge, height_at_outlet, parcels, filepath = ""):
+def plot_outlet_elevation(dt_sed, elev_at_outlet):
+    fig=plt.figure()
+    plt.plot(list(range(0, len(elev_at_outlet)*dt_sed, dt_sed)), elev_at_outlet, "b-", label="at outlet")
+    plt.ylabel("outlet channel height above starting elevation(m)")
+    plt.xlabel("time (seconds)")
+    plt.legend(loc="upper right")
+    return fig
+
+def plot_outlet_conditions(hydrograph_time, discharge, height_at_outlet, elev_at_outlet, parcels,sed_start, dt_sed,filepath = ""):
     fig1 = plot_discharge(hydrograph_time, discharge)
     fig2 = plot_depth(hydrograph_time, height_at_outlet)
-    fig3 = plot_sed_volume(parcels)
+    if len(elev_at_outlet)>0:
+        fig3 = plot_sed_volume(parcels, sed_start)
+        fig4 = plot_outlet_elevation(dt_sed, elev_at_outlet)
     if len(filepath) > 0:
-        fig1.savefig(filepath+"runoff_discharge.jpeg", dpi = 1000)
-        fig2.savefig(filepath+"runoff_height.jpeg", dpi = 1000)
-        fig3.savefig(filepath+"sediment_volume.jpeg", dpi = 1000)
+        fig1.savefig(filepath+"runoff_discharge.jpeg", dpi =500)
+        fig2.savefig(filepath+"runoff_height.jpeg", dpi =500)
+        fig3.savefig(filepath+"sediment_volume.jpeg", dpi =500)
+        fig4.savefig(filepath+"outlet_elevation.jpeg", dpi =500)
         print("outlet figures saved")
     else: 
         plt.show()
@@ -114,7 +127,7 @@ def plot_overland_flow(rmg,outlet_nearest_raster_cell,elapsed_time,filepath = ""
     #Plot overland flow 
     fig=plt.figure()
     imshow_grid(rmg,'topographic__elevation',colorbar_label='Elevation (m)')
-    imshow_grid(rmg,'surface_water__depth',limits=(0,1),cmap=mycmap,colorbar_label='Water depth (m)')
+    imshow_grid(rmg,'surface_water__depth',limits=(0,.5),cmap=mycmap,colorbar_label='Water depth (m)')
     plt.title(f'Time = {round(elapsed_time,1)} s')
     #plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
     if len(filepath) > 0:
@@ -127,7 +140,7 @@ def plot_floodplain(grid, zFP, nX, nY, elapsed_time, filepath = ""):
     ls = LightSource(azdeg=315, altdeg=45)
     plt.imshow(ls.hillshade(np.reshape(zFP,[nX,nY]), vert_exag=10), cmap='gist_earth',origin="lower")
     imshow_grid(grid,'surface_water__depth',
-          limits=(0,1),                    
+          limits=(0,.5),                    
           colorbar_label="Water depth (m)", 
           cmap = mycmap,
           plot_name="Time = %i" %elapsed_time)
@@ -137,21 +150,6 @@ def plot_floodplain(grid, zFP, nX, nY, elapsed_time, filepath = ""):
     else: 
         plt.show()
 def plot_parcels(new_grid, parcels, elapsed_time, outlet_nearest_raster_cell, filepath = ""):
-    #Plot sediment parcels locationss
-    
-   # parcel_filter = np.zeros((parcels.dataset.dims["item_id"]), dtype=bool)
-    
-    #parcel_filter[[parcels.dataset["active_layer"].values==1][0][:,-1]==True] = True
-    
-    #pc_opts= {"parcel_filter": parcel_filter}
-    #fig = plt.figure(figsize = (14,8))
-    
-    #plt.subplot(plt.subplot(1,2,1))
-    #plot_network_and_parcels(
-    #        new_grid, parcels,
-    #        parcel_time_index=len(parcels.time_coordinates)-1)#, parcel_filter = parcel_filter)
-    #plt.plot(rmg.node_x[outlet_nearest_raster_cell], rmg.node_y[outlet_nearest_raster_cell], "yo")
-    #plt.title(f'Time = {round(elapsed_time,1)} s')
 
     fig = plt.figure()
    
@@ -164,7 +162,7 @@ def plot_parcels(new_grid, parcels, elapsed_time, outlet_nearest_raster_cell, fi
     plt.xlabel('grain size (mm)')
     plt.ylabel('Count')
     plt.title('Histogram of grain sizes that left grid')
-    plt.text(0.011, 700, r'original distribution $\mu=2 mm$')
+    plt.text(700, 700, r'original distribution $\mu=2 mm$')
     plt.xlim(0, 20)
     plt.ylim(0, 4000)
     plt.grid(True)
@@ -176,8 +174,8 @@ def plot_parcels(new_grid, parcels, elapsed_time, outlet_nearest_raster_cell, fi
         plt.show()
 def save_animations(source):
     
-    source_list=np.asarray(["./output/flow/*", "./output/sed/*", "./output/floodplain/*"])
-    animation_list = np.asarray(['./output/animationupland.gif', './output/animationsed.gif', './output/animationlowland.gif'])
+    source_list=np.asarray(["./output/flow/*", "./output/floodplain/*", "./output/sed/*"])
+    animation_list = np.asarray(['./output/animationupland.gif', './output/animationlowland.gif', './output/animationsed.gif'])
     for i in range(0,3):
         images = []
         original_files=list(glob.glob(source_list[i]))
